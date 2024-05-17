@@ -44,37 +44,13 @@
 
         .link-list li {
             margin-bottom: 5px;
+            color: #fff; /* White text for the link text */
+            cursor: pointer; /* Change cursor to pointer on hover */
+            transition: color 0.3s; /* Smooth color transition on hover */
         }
 
-        .link-list a {
-            color: #fff;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .link-list a:hover {
+        .link-list li:hover {
             color: #ccc; /* Light grey on hover */
-        }
-
-        .popup {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: rgba(0, 0, 0, 0.7);
-            padding: 20px;
-            border-radius: 5px;
-            z-index: 1000;
-        }
-
-        .popup p {
-            margin: 0;
-            color: #fff;
-        }
-
-        .popup.active {
-            display: block;
         }
     </style>
 </head>
@@ -87,16 +63,12 @@
         <ul id="linkList" class="link-list"></ul>
     </div>
 
-    <div class="popup" id="popup">
-        <p id="popupText"></p>
-    </div>
-
     <script>
         function addLink() {
             const input = document.getElementById('linkInput');
             const url = input.value.trim();
 
-            if (isValidUrl(url)) {
+            if (url !== '') {
                 const linkList = document.getElementById('linkList');
                 const listItem = document.createElement('li');
                 const link = document.createElement('a');
@@ -109,24 +81,6 @@
                 linkList.appendChild(listItem);
 
                 input.value = ''; // Clear input after adding link
-            } else {
-                const popup = document.getElementById('popup');
-                const popupText = document.getElementById('popupText');
-                popupText.textContent = "Invalid URL! Please enter a valid URL.";
-                popup.classList.add('active');
-
-                setTimeout(() => {
-                    popup.classList.remove('active');
-                }, 3000);
-            }
-        }
-
-        function isValidUrl(url) {
-            try {
-                new URL(url);
-                return true;
-            } catch (error) {
-                return false;
             }
         }
     </script>
